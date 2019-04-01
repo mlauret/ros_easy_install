@@ -1,5 +1,5 @@
 # ros_easy_install
-Script to install ROS automatically
+Script to install ROS Kinetic on Ubuntu 16.04 Desktop automatically from binary releases
 
 cURL:
 
