@@ -1,6 +1,7 @@
 #!/bin/bash
 
-PASS=`zenity --password`
+echo -n Enter Sudo password: 
+read -s PASS
 
 echo $PASS | sudo -S sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 
