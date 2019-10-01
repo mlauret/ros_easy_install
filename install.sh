@@ -1,5 +1,5 @@
 #!/bin/bash
-
+{
 echo -n Enter Sudo password: 
 read -s PASS
 echo
@@ -21,3 +21,4 @@ rosdep update
 echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 
 source ~/.bashrc
+}
