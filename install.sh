@@ -35,16 +35,16 @@ check_if_source_list_exist(){
 }
 
 check_if_public_key_exist(){ 
-  apt-key adv --list-public-keys --with-colons | grep '^pub' | cut -d':' -f 5 | egrep F42ED6FBAB17C655 &> /dev/null
-  if [ "$?" -eq 0 ]; then
+  output=$(apt-key adv --list-public-keys --with-colons | grep '^pub' | cut -d':' -f 5 | egrep F42ED6FBAB17C655 &> /dev/null)
+  if [ "$output" -eq 0 ]; then
     echo "An another ROS version seem to be installed (ROS apt key exist)"
     exit 1
   fi
 }
 
 check_if_source_in_bashrc_exist(){
-  grep "source /opt/ros/" ~/.bashrc &> /dev/null
-  if [ "$?" -eq 0 ]; then
+  output=$(grep "source /opt/ros/" ~/.bashrc &> /dev/null)
+  if [ "$output" -eq 0 ]; then
     echo "An another ROS version seem to be installed (source in .bashrc exist)"
     exit 1
   fi
