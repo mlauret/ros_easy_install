@@ -31,7 +31,7 @@ read_password_from_file(){
 check_distro(){
   if [ -r /etc/os-release ]; then
       . /etc/os-release
-      if [ $UBUNTU_CODENAME != xenial ] || [ $UBUNTU_CODENAME != wily ]; then
+      if [ $UBUNTU_CODENAME != xenial ] && [ $UBUNTU_CODENAME != wily ]; then
           echo "The ROS version doesn't match the Ubuntu version"
           unset_func
           exit 1
