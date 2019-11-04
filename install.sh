@@ -58,8 +58,6 @@ do_install(){
     read_password_from_file
   elif [ -z "$PASS" ] && [ ! -r .secret ]; then
     read_password_from_cli
-  else
-    # Password is set in env variable, nothing to do
   fi
 
   # Check if ROS is already installed by checking some step
