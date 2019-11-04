@@ -108,8 +108,6 @@ install_ros(){
   rosdep update
 
   echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
-
-  source ~/.bashrc
 }
 
 do_install(){
@@ -129,6 +127,9 @@ do_install(){
   install_ros # Actually install ROS
   
   unset_func # Unset the function and the sudo password
+  
+  echo "To finish the installation, you will need to restart a new shell of run the following command : "
+  echo "source ~/.bashrc"
 
  }
 
