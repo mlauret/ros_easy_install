@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 {
 
 #https://unix.stackexchange.com/a/223000 < this guy rocks
@@ -35,16 +35,16 @@ check_if_source_list_exist(){
 }
 
 check_if_public_key_exist(){ 
-  output=$(apt-key adv --list-public-keys --with-colons | grep '^pub' | cut -d':' -f 5 | egrep F42ED6FBAB17C655 &> /dev/null)
-  if [ "$output" -eq 0 ]; then
+  grep "Open Robotics" /etc/apt/trusted.gpg &> /dev/null # TODO : Find a better way
+  if [ "$?" -eq 0 ]; then
     echo "An another ROS version seem to be installed (ROS apt key exist)"
     exit 1
   fi
 }
 
 check_if_source_in_bashrc_exist(){
-  output=$(grep "source /opt/ros/" ~/.bashrc &> /dev/null)
-  if [ "$output" -eq 0 ]; then
+  grep "source /opt/ros/" ~/.bashrc &> /dev/null
+  if [ "$?" -eq 0 ]; then
     echo "An another ROS version seem to be installed (source in .bashrc exist)"
     exit 1
   fi
