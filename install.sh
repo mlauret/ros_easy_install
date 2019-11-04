@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 {
 
+unset_func(){
+  unset -f unset_var_and_func read_password_from_cli read_password_from_file check_if_sudo \
+  check_if_source_list_exist check_if_public_key_exist check_if_source_in_bashrc_exist \
+  check_sudo_password get_password install_ros do_install
+ 
+}
+
 #https://unix.stackexchange.com/a/223000 < this guy rocks
 read_password_from_cli() {
   PASS="$(
@@ -14,15 +21,18 @@ read_password_from_cli() {
     printf '%s\n' "$password"
     exit "$ret"
   )"
+  
+
 }
 
 read_password_from_file(){
-  read -r firstline<.secret
+  read -r PASS<.secret
 }
 
 check_if_sudo(){
  if [ "$EUID" -eq 0 ]; then
    echo "Please run as normal user"
+   unset_func
    exit 1
  fi
 }
@@ -30,41 +40,48 @@ check_if_sudo(){
 check_if_source_list_exist(){
   if [ -e /etc/apt/sources.list.d/ros-latest.list ]; then
     echo "An another ROS version seem to be installed (/etc/apt/sources.list.d/ros-latest.list) already exist)"
+    unset_func
     exit 1
   fi
 }
 
 check_if_public_key_exist(){ 
-  grep "Open Robotics" /etc/apt/trusted.gpg &> /dev/null # TODO : Find a better way
-  if [ "$?" -eq 0 ]; then
+  output=$(grep "Open Robotics" /etc/apt/trusted.gpg) # TODO : Find a better way
+  if [ "$output" != "" ]; then
     echo "An another ROS version seem to be installed (ROS apt key exist)"
+    unset_func
     exit 1
   fi
 }
 
 check_if_source_in_bashrc_exist(){
-  grep "source /opt/ros/" ~/.bashrc &> /dev/null
-  if [ "$?" -eq 0 ]; then
+  output=$(grep "source /opt/ros/" ~/.bashrc)
+  if [ "$output" != "" ]; then
     echo "An another ROS version seem to be installed (source in .bashrc exist)"
+    unset_func
     exit 1
   fi
 }
 
-do_install(){
+check_sudo_password(){
+  output=$(echo $PASS | sudo -S echo "test" 2> /dev/null)
+  if [ "$output" != "test" ]; then
+    echo "Sudo Password seem incorrect"
+    unset_func
+    exit 1
+  fi
 
-  check_if_sudo # exit if user is super user
-  
+}
+
+get_password(){
   if [ -z "$PASS" ] && [ -r .secret ]; then
     read_password_from_file
   elif [ -z "$PASS" ] && [ ! -r .secret ]; then
     read_password_from_cli
   fi
+}
 
-  # Check if ROS is already installed by checking some step
-  check_if_source_list_exist
-  check_if_public_key_exist
-  check_if_source_in_bashrc_exist
-
+install_ros(){
   echo $PASS | sudo -S sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 
   echo $PASS | sudo -S apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
@@ -74,14 +91,33 @@ do_install(){
   echo $PASS | sudo -S apt-get install -y ros-kinetic-ros-base
 
   echo $PASS | sudo -S rosdep init
-
-  unset PASS
-
+  
   rosdep update
 
   echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 
   source ~/.bashrc
+}
+
+do_install(){
+
+  check_if_sudo # exit if user is super user
+  
+  get_password # Read password from env/file or stdin
+
+  check_sudo_password # Exit if a simple sudo command fail
+
+
+  # Check if ROS is already installed by checking some step
+  check_if_source_list_exist
+  check_if_public_key_exist
+  check_if_source_in_bashrc_exist
+
+
+  install_ros # Actually install ROS
+  
+  unset_func # Unset the function and the sudo password
+
  }
 
 do_install
