@@ -1,6 +1,11 @@
 #!/bin/bash
 
-read -p "Sudo password: " -s PASS
+stty -echo
+printf "Password: "
+read PASS
+stty echo
+printf "\n"
+
 
 echo $PASS | sudo -S sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 
