@@ -61,7 +61,7 @@ check_if_source_list_exist(){
 
 check_if_public_key_exist(){ 
   output=$(grep "Open Robotics" /etc/apt/trusted.gpg) # TODO : Find a better way
-  if [ -n "$output" ]; then
+  if [ -n "$output" ]; then
     echo "An another ROS version seem to be installed (ROS apt key exist)"
     unset_func
     exit 1
@@ -70,7 +70,7 @@ check_if_public_key_exist(){
 
 check_if_source_in_bashrc_exist(){
   output=$(grep "source /opt/ros/" ~/.bashrc)
-  if [ -n "$output" ]; then
+  if [ -n "$output" ]; then
     echo "An another ROS version seem to be installed (source in .bashrc exist)"
     unset_func
     exit 1
