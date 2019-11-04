@@ -1,8 +1,8 @@
 #!/bin/bash
 {
 
-#https://unix.stackexchange.com/a/223000
-read_password() {
+#https://unix.stackexchange.com/a/223000 < this guy rocks
+read_password_from_cli() {
   PASS="$(
     exec < /dev/tty || exit
     tty_settings=$(stty -g) || exit
@@ -17,7 +17,8 @@ read_password() {
 }
 
 do_install(){
-  read_password()
+
+  read_password_from_cli
 
   echo $PASS | sudo -S sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 
@@ -39,6 +40,6 @@ do_install(){
   source ~/.bashrc
  }
 
-do_install()
+do_install
 
 }
