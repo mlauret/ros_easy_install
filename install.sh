@@ -21,12 +21,26 @@ read_password_from_cli() {
     printf '%s\n' "$password"
     exit "$ret"
   )"
-  
-
 }
 
 read_password_from_file(){
   read -r PASS<.secret
+}
+
+# https://askubuntu.com/a/450520 < this guy also rock
+check_distro(){
+  if [ -r /etc/os-release ]; then
+      . /etc/os-release
+      if [ $UBUNTU_CODENAME != xenial ] || [ $UBUNTU_CODENAME != wily ]; then
+          echo "The ROS version doesn't match the Ubuntu version"
+          unset_func
+          exit 1
+      fi
+  else
+      echo "This Linux version doesn't seem to be supported"
+      unset_func
+      exit 1
+  fi
 }
 
 check_if_sudo(){
@@ -47,7 +61,7 @@ check_if_source_list_exist(){
 
 check_if_public_key_exist(){ 
   output=$(grep "Open Robotics" /etc/apt/trusted.gpg) # TODO : Find a better way
-  if [[ "$output" != "" ]]; then
+  if [ -n "$output" ]; then
     echo "An another ROS version seem to be installed (ROS apt key exist)"
     unset_func
     exit 1
@@ -56,7 +70,7 @@ check_if_public_key_exist(){
 
 check_if_source_in_bashrc_exist(){
   output=$(grep "source /opt/ros/" ~/.bashrc)
-  if [[ "$output" != "" ]]; then
+  if [ -n "$output" ]; then
     echo "An another ROS version seem to be installed (source in .bashrc exist)"
     unset_func
     exit 1
@@ -70,7 +84,6 @@ check_sudo_password(){
     unset_func
     exit 1
   fi
-
 }
 
 get_password(){
@@ -100,19 +113,18 @@ install_ros(){
 }
 
 do_install(){
-
-  check_if_sudo # exit if user is super user
   
+  check_if_sudo # exit if user is super user
+
+  check_distro # Check if the current distro is compatible with this ROS install
+
   get_password # Read password from env/file or stdin
-
   check_sudo_password # Exit if a simple sudo command fail
-
 
   # Check if ROS is already installed by checking some step
   check_if_source_list_exist
   check_if_public_key_exist
   check_if_source_in_bashrc_exist
-
 
   install_ros # Actually install ROS
   
