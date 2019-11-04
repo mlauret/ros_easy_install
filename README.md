@@ -12,3 +12,9 @@ or Wget:
 ```sh
 wget -qO- https://raw.githubusercontent.com/mlauret/ros_easy_install/master/install.sh | bash
 ```
+
+
+This works is heavily inspired from : 
+
+Node version Manager
+https://github.com/nvm-sh/nvm 
