@@ -16,5 +16,5 @@ wget -qO- https://raw.githubusercontent.com/mlauret/ros_easy_install/master/inst
 
 This works is heavily inspired from : 
 
-Node version Manager
+Node version Manager : 
 https://github.com/nvm-sh/nvm 
