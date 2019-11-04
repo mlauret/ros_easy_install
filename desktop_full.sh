@@ -101,7 +101,7 @@ install_ros(){
 
   echo $PASS | sudo -S apt-get update
 
-  echo $PASS | sudo -S apt-get install -y ros-kinetic-desktop_full
+  echo $PASS | sudo -S apt-get install -y ros-kinetic-desktop-full
 
   echo $PASS | sudo -S rosdep init
   
