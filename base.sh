@@ -31,7 +31,7 @@ read_password_from_file(){
 check_distro(){
   if [ -r /etc/os-release ]; then
       . /etc/os-release
-      if [ $UBUNTU_CODENAME != xenial ] && [ $UBUNTU_CODENAME != wily ]; then
+      if [ $UBUNTU_CODENAME != artful ] && [ $UBUNTU_CODENAME != bionic ]; then
           echo "The ROS version doesn't match the Ubuntu version"
           unset_func
           exit 1
@@ -101,13 +101,13 @@ install_ros(){
 
   echo $PASS | sudo -S apt-get update
 
-  echo $PASS | sudo -S apt-get install -y ros-kinetic-ros-base
+  echo $PASS | sudo -S apt-get install -y ros-melodic-ros-base
 
   echo $PASS | sudo -S rosdep init
   
   rosdep update
 
-  echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
+  echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 }
 
 do_install(){
