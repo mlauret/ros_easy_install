@@ -60,7 +60,7 @@ Work only when used as non-root user.
 You have 3 way of giving the sudo password to the script : 
 
  - You can make a file called `.secret` containing the password (and only the password) in the working directory of the script
- - You can set an environment variable called `PASS` containing the password
+ - You can export an environment variable called `PASS` containing the password (`export PASS=<sudo password>`)
  - If you don't use one of the above methods, the script will ask you for the password at the beginning
 
 You can use `curl -o-` instead of `wget -qO-` if you prefer/need curl.
