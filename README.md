@@ -1,8 +1,11 @@
 # ros easy install 
 Script to install ROS on Ubuntu with one line
 
+
+
 <details>
-<summary>Ubuntu 17.10 and 18.04 :</summary>
+<br>
+  <summary><b>Ubuntu 17.10 and 18.04 :</b></summary>
 <br>
 
 
@@ -25,7 +28,7 @@ wget -qO- https://raw.githubusercontent.com/mlauret/ros_easy_install/melodic/bas
 
 <br>
 <details>
-<summary>Ubuntu 15.10 and 16.04 :</summary>
+  <summary><b>Ubuntu 15.10 and 16.04 :</b></summary>
 <br>
 
   
@@ -60,7 +63,7 @@ You have 3 way of giving the sudo password to the script :
  - You can set an environment variable called `PASS` containing the password
  - If you don't use one of the above methods, the script will ask you for the password at the beginning
 
-You can use `curl -o-` instead of `wget -qO-` if you prefer/need curl
+You can use `curl -o-` instead of `wget -qO-` if you prefer/need curl.
 
 ## Big thanks
 
