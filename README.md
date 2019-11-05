@@ -3,7 +3,7 @@ Script to install ROS on Ubuntu with one line
 
 <details>
 <summary>Ubuntu 17.10 and 18.04 :</summary>
-
+<br>
 <details>
 <summary>cURL</summary>
 <br>
@@ -23,7 +23,7 @@ curl -o- https://raw.githubusercontent.com/mlauret/ros_easy_install/melodic/base
 ```
 
 </details>
-  
+<br>
 <details>
 <summary>wget</summary>
 <br>
@@ -42,10 +42,10 @@ wget -qO- https://raw.githubusercontent.com/mlauret/ros_easy_install/melodic/bas
 ```
 
 </details>
-  
+
 </details>
 
-
+<br>
 <details>
 <summary>Ubuntu 15.10 and 16.04 :</summary>
 <br>
@@ -67,7 +67,7 @@ curl -o- https://raw.githubusercontent.com/mlauret/ros_easy_install/kinetic/base
 ```
 
 </details>
-  
+<br>
 <details>
 <summary>wget</summary>
 <br>
