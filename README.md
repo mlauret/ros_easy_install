@@ -2,12 +2,8 @@
 Script to install ROS on Ubuntu with one line
 
 <details>
-<summary>
-  
-Ubuntu 17.10 and 18.04 : 
-  
-</summary>
-<br>
+<summary>Ubuntu 17.10 and 18.04 :</summary>
+
 <details>
 <summary>cURL</summary>
 <br>
@@ -51,11 +47,7 @@ wget -qO- https://raw.githubusercontent.com/mlauret/ros_easy_install/melodic/bas
 
 
 <details>
-<summary>
-  
-Ubuntu 15.10 and 16.04 : 
-  
-</summary>
+<summary>Ubuntu 15.10 and 16.04 :</summary>
 <br>
 <details>
 <summary>cURL</summary>
@@ -103,4 +95,10 @@ Node version Manager :
 https://github.com/nvm-sh/nvm 
 
 
+
+<details>
+<summary>enjoy !</summary>
+
 ![ROS easy install](https://user-images.githubusercontent.com/15939705/68167242-28097900-ff65-11e9-8420-b7a19a736009.png)
+
+</details>
