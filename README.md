@@ -89,6 +89,21 @@ wget -qO- https://raw.githubusercontent.com/mlauret/ros_easy_install/kinetic/bas
   
 </details>
 
+
+## Details
+
+Work only on Ubuntu and for ROS Kinetic and Melodic.
+
+Work only when used as non-root user.
+
+You have 3 way of giving the sudo password to the script : 
+
+ - You can make a file called `.secret` containing the password (and only the password) where you launch the script
+ - You can set an environment variable called `PASS` containing the password
+ - If you don't use one of the above methods, the script will ask you for the password at the beginning
+
+## Big thanks
+
 This works is heavily inspired from : 
 
 Node version Manager : 
@@ -99,6 +114,6 @@ https://github.com/nvm-sh/nvm
 <details>
 <summary>enjoy !</summary>
 
-![ROS easy install](https://user-images.githubusercontent.com/15939705/68167242-28097900-ff65-11e9-8420-b7a19a736009.png)
+![ROS easy install](https://user-images.githubusercontent.com/15939705/68169225-a10bcf00-ff6b-11e9-81b3-57081bd2e89d.png)
 
 </details>
